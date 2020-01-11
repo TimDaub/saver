@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+        <title>Savings</title>
+        <style>
+          body, html {
+            background-color: black;
+            overflow: hidden;
+          }
+
+          section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+          }
+
+          h1 {
+            color: white;
+            font-family: Arial;
+            font-size: 16vw;
+          }
+        </style>
+    </head>
+    <body>
+      <section>
+        <h1></h1>	
+      </section>
+      <script>
+
+        function calc() {
+          var stopTime = 1578322800;
+          var prices = {
+            filter: 1.4,
+            pape: 1.4,
+            tabacco: 6.50
+          };
+
+          var quantity = {
+            filter: 100,
+            pape: 100,
+            // In grams
+            tabacco: 30,
+            cig: 0.55,
+            daily: 20
+          };
+
+          var dailyGrams = quantity.cig * quantity.daily;
+          var eurPerGram = prices.tabacco / quantity.tabacco;
+
+          var dailyCost = dailyGrams * eurPerGram;
+          var hourlyCost = dailyCost / 24;
+          var minCost = hourlyCost / 60;
+          var secCost = minCost / 60;
+
+          var currTime = new Date().getTime() / 1000; 
+          var diff = currTime - stopTime;
+          var savings = diff * secCost;
+
+          document.querySelector("h1").textContent = savings.toFixed(6) + " €";
+        }
+
+        setInterval(calc, 100);
+      </script>
+    </body>
+</html>
